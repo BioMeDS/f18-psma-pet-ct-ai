@@ -9,4 +9,15 @@ This repository contains the accompanying code for the article:
 
 ## Pre-processing
 
-Exported and pseudonomized PET and CT dicom images for each examination were converted to nifti format using [`dcm2niix`](https://github.com/rordenlab/dcm2niix) (Chris Rorden's dcm2niiX version v1.0.20220720  (JP2:OpenJPEG) (JP-LS:CharLS) GCC5.5.0 x86-64 (64-bit Linux)).
+### Nifti conversion
+Exported and pseudonomized PET and CT dicom images for each examination were converted to nifti format using [`dcm2niix`](https://github.com/rordenlab/dcm2niix) (Chris Rorden's dcm2niiX version v1.0.20220720  (JP2:OpenJPEG) (JP-LS:CharLS) GCC5.5.0 x86-64 (64-bit Linux)). Those niftis are saved in `data/nifti` (train and validation set) and `data/nifti_ts2024` (test set).
+
+### Prostate segmentation
+The prostate and urinary bladder were segmented with [`TotalSegmentator`](https://github.com/wasserth/TotalSegmentator) (version 2.1.0) in all ct images.
+
+```bash
+for i in data/nifti*/*_ct.nii.gz
+do
+	TotalSegmentator -i $i -o analysis/totalsegmentator2/$(basename $i _ct.nii.gz) -rs prostate urinary_bladder
+done
+```
