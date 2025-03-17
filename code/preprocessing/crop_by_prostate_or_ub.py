@@ -30,14 +30,19 @@ def crop_pet_ct_by_pro_or_ub(pet, ct, seg_pro, seg_ub):
     end_ct = from_patient_to_pix(from_ct_to_patient(center, ct)+100,ct)
     start_pet = from_patient_to_pix(from_ct_to_patient(center, ct)-100,pet)
     end_pet = from_patient_to_pix(from_ct_to_patient(center, ct)+100,pet)
-    ct_cropped = np.array(ct.dataobj)[end_ct[0]:start_ct[0],start_ct[1]:end_ct[1],start_ct[2]:end_ct[2]]
-    pet_cropped = np.array(pet.dataobj)[end_pet[0]:start_pet[0],start_pet[1]:end_pet[1],start_pet[2]:end_pet[2]]
+    ct_cropped = ct.get_fdata()[end_ct[0]:start_ct[0],start_ct[1]:end_ct[1],start_ct[2]:end_ct[2]]
+    pet_cropped = pet.get_fdata()[end_pet[0]:start_pet[0],start_pet[1]:end_pet[1],start_pet[2]:end_pet[2]]
     return pet_cropped, ct_cropped, start_pet, start_ct, end_pet, end_ct
 
-ids = pd.read_csv("data/labels_ts2024.tsv", sep="\t").pseudo_id
+#ids = pd.read_csv("data/labels_ts2024.tsv", sep="\t").pseudo_id
+ids = pd.read_csv("data/labels_clean.tsv", sep="\t").pseudo_id
 
 for i in tqdm(ids):
-    pet,ct,seg_pro,seg_ub = get_niftis_by_id(i, test_set=True)
+    test_set = True
+    if str(i)[0] != "T":
+         test_set = False
+         i = f"{i:05d}"
+    pet,ct,seg_pro,seg_ub = get_niftis_by_id(i, test_set=test_set)
     pet_cropped, ct_cropped, start_pet, start_ct, end_pet, end_ct = crop_pet_ct_by_pro_or_ub(pet, ct, seg_pro, seg_ub)
     start_ct_int = np.round(start_ct).astype(np.int16)
     end_ct_int = np.round(end_ct).astype(np.int16)
