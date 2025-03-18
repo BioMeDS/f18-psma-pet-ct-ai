@@ -21,3 +21,23 @@ do
 	TotalSegmentator -i $i -o analysis/totalsegmentator2/$(basename $i _ct.nii.gz) -rs prostate urinary_bladder
 done
 ```
+
+### Cropping around prostate (or urinary bladder)
+
+Cropping a 20x20x20 cm³ cube around the centroid of the prostate (if detected) or urinary bladder (otherwise) with the script `code/preprocessing/crop_by_prostate_or_ub.py`.
+The cropped files are saved in `data/cropped_nifti`.
+
+### Conversion from BQML to SUV
+
+#### Determine factors for SUV conversion
+
+The converted nifti PET files have values in the BQML unit. In order to convert them to SUV, individual conversion factors have to be determined. This was done by applying `code/preprocessing/bqml_to_suv.py` to the dicom files (containing the relevant header information) to create the factors in `data/suv_factors.tsv`.
+
+#### Convert cropped PET niftis
+
+```bash
+while read pid suv
+do
+	fslmaths data/cropped_nifti/${pid}_pet.nii.gz -mul $suv data/cropped_nifti_suv/${pid}_pet.nii.gz
+done <<(tail -n +2 data/suv_factors.tsv)
+```
