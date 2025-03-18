@@ -5,10 +5,10 @@ from tqdm import tqdm
 
 def get_niftis_by_id(i, test_set=False):
     ts = "_ts2024" if test_set else ""
-    pet = nibabel.load(f"/data/f18-psma-pet-ct-ml/data/nifti{ts}/{i}_pet.nii.gz")
-    ct = nibabel.load(f"/data/f18-psma-pet-ct-ml/data/nifti{ts}/{i}_ct.nii.gz")
-    seg_pro = nibabel.load(f"analysis/totalsegmentator2/{i}/prostate.nii.gz")
-    seg_ub = nibabel.load(f"analysis/totalsegmentator2/{i}/urinary_bladder.nii.gz")
+    pet = nibabel.load(f"/data/f18-psma-pet-ct-ml/data/nifti{ts}/{i}_pet.nii.gz") # type: ignore
+    ct = nibabel.load(f"/data/f18-psma-pet-ct-ml/data/nifti{ts}/{i}_ct.nii.gz") # type: ignore
+    seg_pro = nibabel.load(f"analysis/totalsegmentator2/{i}/prostate.nii.gz") # type: ignore
+    seg_ub = nibabel.load(f"analysis/totalsegmentator2/{i}/urinary_bladder.nii.gz") # type: ignore
     return pet, ct, seg_pro, seg_ub
 
 def get_center(seg):
@@ -48,11 +48,11 @@ for i in tqdm(ids):
     end_ct_int = np.round(end_ct).astype(np.int16)
     start_pet_int = np.round(start_pet).astype(np.int16)
     end_pet_int = np.round(end_pet).astype(np.int16)
-    cropped_pet_affine = pet.affine.copy()
+    cropped_pet_affine = pet.affine.copy() # type: ignore
     cropped_pet_affine[:3,3] = from_ct_to_patient(start_pet_int, pet)
-    cropped_ct_affine = ct.affine.copy()
+    cropped_ct_affine = ct.affine.copy() # type: ignore
     cropped_ct_affine[:3,3] = from_ct_to_patient(start_ct_int, ct)
-    cropped_pet_nii = nibabel.Nifti1Image(pet_cropped, cropped_pet_affine, pet.header)
-    nibabel.save(cropped_pet_nii, f"data/cropped_nifti/{i}_pet.nii.gz")
-    cropped_ct_nii = nibabel.Nifti1Image(ct_cropped, cropped_ct_affine, ct.header)
-    nibabel.save(cropped_ct_nii, f"data/cropped_nifti/{i}_ct.nii.gz")
+    cropped_pet_nii = nibabel.Nifti1Image(pet_cropped, cropped_pet_affine, pet.header) # type: ignore
+    nibabel.save(cropped_pet_nii, f"data/cropped_nifti/{i}_pet.nii.gz") # type: ignore
+    cropped_ct_nii = nibabel.Nifti1Image(ct_cropped, cropped_ct_affine, ct.header) # type: ignore
+    nibabel.save(cropped_ct_nii, f"data/cropped_nifti/{i}_ct.nii.gz") # type: ignore
