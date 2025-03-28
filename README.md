@@ -41,3 +41,10 @@ do
 	fslmaths data/cropped_nifti/${pid}_pet.nii.gz -mul $suv data/cropped_nifti_suv/${pid}_pet.nii.gz
 done <<(tail -n +2 data/suv_factors.tsv)
 ```
+
+#### Get ranges for scaling
+
+```bash
+python code/preprocessing/nii_range.py data/cropped_nifti/*_ct.nii.gz >analysis/cropped_ct_range.tsv
+python code/preprocessing/nii_range.py data/cropped_nifti_suv/*_pet.nii.gz >analysis/cropped_pet_suv_range.tsv
+```
