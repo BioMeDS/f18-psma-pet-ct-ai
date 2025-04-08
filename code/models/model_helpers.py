@@ -1,7 +1,26 @@
 import torch
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler
 from monai.handlers import from_engine # type: ignore
 from monai.transforms import MapTransform # type: ignore
 from ignite.metrics import ConfusionMatrix, ROC_AUC
+
+def load_train_val_data(cropped=True, suv=True, drop_na=False):
+    crop = "cropped_" if cropped else ""
+    suv = "_suv" if suv else ""
+    df = pd.read_csv("data/labels.tsv", sep="\t", dtype={"pseudo_id": str})
+    df = df.assign(pet=lambda df: df['pseudo_id'].map(lambda pseudo_id: f"data/{crop}nifti{suv}/{pseudo_id}_pet.nii.gz"))
+    df = df.assign(ct=lambda df: df['pseudo_id'].map(lambda pseudo_id: f"data/{crop}nifti/{pseudo_id}_ct.nii.gz"))
+    # remove label 2 cases
+    df = df[df.label != 2]
+    scaler = MinMaxScaler()
+    psa_normalized = scaler.fit_transform(df[["psa"]])
+    df["psa_norm"] = psa_normalized
+    if drop_na:
+        df = df.dropna()
+    train_data = df[df["set"] == "train"].to_dict('records')
+    val_data = df[df["set"] == "val"].to_dict('records')
+    return train_data, val_data
 
 def roc_transform(output):
     pred, label = from_engine(["pred","label"])(output)
