@@ -2,7 +2,7 @@
 
 This repository contains the accompanying code for the article:
 
-> Korb M, Efetürk H, Jedamzik T, Hartrampf PE, Kosmala A, Serfling SE, Michalski K, Dirk R, Buck AK, Werner RA, Schlötelburg W, and Ankenbrand M. *Detection of local prostate cancer recurrence from PET/CT scans using deep learning*. In preparation
+> Korb M, Efetürk H, Jedamzik T, Hartrampf PE, Kosmala A, Serfling SE, Dirk R, Michalski K, Buck AK, Werner RA, et al. Detection of Local Prostate Cancer Recurrence from PET/CT Scans Using Deep Learning. Cancers. 2025; 17(9):1575. https://doi.org/10.3390/cancers17091575 
 
 > [!IMPORTANT]
 > Large outputs (e.g. model weights) are deposited on Zenodo ([10.5281/zenodo.15174580](https://doi.org/10.5281/zenodo.15174580)). Training data can not be shared publically. To understand the structure of the data, these files are included as symbolic links that point outside of the repository.
