@@ -1,0 +1,80 @@
+cff-version: 1.2.0
+message: If you use this data/code, please cite both the software repository and the paper (see preferred-citation).
+authors:
+  - family-names: Korb
+    given-names: "Marko"
+  - family-names: Efetürk
+    given-names: "Hülya"
+  - family-names: Jedamzik
+    given-names: "Tim"
+  - family-names: Hartrampf
+    given-names: "Philipp E"
+  - family-names: Kosmala
+    given-names: "Aleksander"
+  - family-names: Serfling
+    given-names: "Sebastian E"
+  - family-names: Dirk
+    given-names: "Robin"
+  - family-names: Michalski
+    given-names: "Kerstin"
+  - family-names: Buck
+    given-names: "Andreas K"
+  - family-names: Werner
+    given-names: "Rudolf A"
+  - family-names: Schlötelburg
+    given-names: "Wiebke"
+    orcid: 0000-0001-9685-0947
+    affiliation: "Department of Nuclear Medicine, University Hospital Würzburg, Germany"
+    email: schloetelb_w@ukw.de
+  - family-names: Ankenbrand
+    given-names: "Markus J"
+    orcid: 0000-0002-6620-807X
+    affiliation: "Center for Computational and Theoretical Biology, University of Würzburg, Germany"
+    email: markus.ankenbrand@uni-wuerzburg.de
+title: "Detection of local prostate cancer recurrence from PET/CT scans using deep learning"
+version: 0.3.0
+doi: 10.5281/zenodo.15188969
+date-released: 2025-04-10
+repository-code: https://github.com/BioMeDS/f18-psma-pet-ct-ai
+keywords:
+  - PET/CT
+  - Cancer
+  - Prostate
+  - Deep Learning
+license: MIT
+url: https://github.com/BioMeDS/f18-psma-pet-ct-ai/new/main
+preferred-citation:
+  type: article
+  scope: Cite this paper if you use this code in your research
+  authors:
+    - family-names: Korb
+      given-names: "Marko"
+    - family-names: Efetürk
+      given-names: "Hülya"
+    - family-names: Jedamzik
+      given-names: "Tim"
+    - family-names: Hartrampf
+      given-names: "Philipp E"
+    - family-names: Kosmala
+      given-names: "Aleksander"
+    - family-names: Serfling
+      given-names: "Sebastian E"
+    - family-names: Dirk
+      given-names: "Robin"
+    - family-names: Michalski
+      given-names: "Kerstin"
+    - family-names: Buck
+      given-names: "Andreas K"
+    - family-names: Werner
+      given-names: "Rudolf A"
+    - family-names: Schlötelburg
+      given-names: "Wiebke"
+    - family-names: Ankenbrand
+      given-names: "Markus J"
+  title: "Detection of Local Prostate Cancer Recurrence from PET/CT Scans Using Deep Learning"
+  year: 2025
+  journal: Cancers
+  volume: 17
+  issue: 9
+  doi: 10.3390/cancers17091575
+  url: https://doi.org/10.3390/cancers17091575
