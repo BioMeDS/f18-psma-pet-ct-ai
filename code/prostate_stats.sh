@@ -1,0 +1,2 @@
+for i in ^R* ; do for j in prostate urinary_bladder; do flirt -in $i/$j.nii.gz -ref ../../data/nifti/${i}_pet.nii.gz -usesqform -out $i/${j}-pet.nii.gz -applyxfm; done; done
+(echo "pid min max rmin rmax vol_pix vol_mm3 mean sd cx_px cy_px cz_px cx cy cz"; for i in data/nifti_suv/*.nii.gz; do pid=$(basename $i _pet.nii.gz); echo -n "$pid "; fslstats $i -k analysis/totalsegmentator2/$pid/prostate-pet-th.nii.gz -R -r -v -m -s -c -C; done) | perl -pe 's/ /\t/g;s/\s+$/\n/' | tee analysis/prostate_stats.tsv
